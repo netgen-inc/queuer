@@ -1,6 +1,11 @@
 var Hook = require('hook.io').Hook;
 var express = require('express');
+var _ = require('underscore');
 var mon = require('./lib/monitor');
+var argv = require('optimist').argv;
+var Hash = require('hashish');
+
+var startup = new Date();
 
 var hook = new Hook( {
     name: 'hook-server',
@@ -16,7 +21,7 @@ hook.on('hook::ready', function(){
   });
 });
 
-hook.start();
+hook.connect();
 
 var Queue = function(key){
   this.queue = [];
@@ -67,4 +72,33 @@ app.put('/queue/:key', function(req, res){
     }
 });
 
-app.listen(3000);
+app.post('/queue/:key', function(req, res){
+  var key = req.params.key;
+  if( queues[key] === undefined ) {
+    res.send('Queue is empty', 404);
+  } else {
+    switch( req.body.action ) {
+      case 'state':
+        var state = { length: queues[key].length };
+        res.send( JSON.stringify( state ) );
+      break;
+
+      case 'clean':
+        queues[key] = [];
+        res.send( 'OK' );
+      break;
+
+      default:
+        res.send('ERROR:UNKNOW_ACTION', 401);
+      break;
+    }
+  }
+});
+
+app.get('/state', function(req, res){
+  res.send( JSON.stringify( { startup: startup.toLocaleString(), queues: Hash.map( queues, function( v, k ){
+    return { length: v.length };
+  } ) } ) );
+});
+
+app.listen(argv.p || 3000);
