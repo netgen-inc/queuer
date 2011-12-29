@@ -1,0 +1,20 @@
+{
+    "name": "queuer",
+    "version": "0.1.0",
+    "description": "Queue Service",
+    "author": "iwater <iwater@gmail.com>",
+    "dependencies": {
+        "express": ">= 2.5.2",
+        "underscore": ">= 1.2.3",
+        "optimist": ">= 0.3.0",
+        "redis": ">= 0.7.1",
+        "devent": ">= 0.1.0"
+    },
+    "main": "index",
+    "scripts": {
+        "start": "node queuer-server.js"
+    },
+    "engines": {
+        "node": "0.6.x"
+    }
+}
