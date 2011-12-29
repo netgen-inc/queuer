@@ -107,7 +107,7 @@ app.post('/queue/:key', function(req, res){
 app.get('/state', function(req, res){
   queues.state( function( state ) {
     res.send( JSON.stringify( { startup: startup.toLocaleString(), queues: state } ) );
-  };
+  });
 });
 
 app.listen(argv.p || 3000);
