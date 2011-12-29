@@ -1,9 +1,7 @@
-var Hook = require('hook.io').Hook;
 var express = require('express');
 var _ = require('underscore');
 var mon = require('./lib/monitor');
 var argv = require('optimist').argv;
-var Hash = require('hashish');
 var Queue = require('./lib/redis');
 var de = require('../event/lib/devent').createDEvent('queuer');
 
