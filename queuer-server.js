@@ -3,7 +3,7 @@ var _ = require('underscore');
 var mon = require('./lib/monitor');
 var argv = require('optimist').argv;
 var Queue = require('./lib/redis');
-var de = require('../event/lib/devent').createDEvent('queuer');
+var de = require('devent').createDEvent('queuer');
 
 var startup = new Date();
 /*
