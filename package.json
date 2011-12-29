@@ -8,7 +8,7 @@
         "underscore": ">= 1.2.3",
         "optimist": ">= 0.3.0",
         "redis": ">= 0.7.1",
-        "devent": ">= 0.1.0"
+        "devent": "https://github.com/netgen-inc/devent/tarball/master"
     },
     "main": "index",
     "scripts": {
