@@ -1,0 +1,4 @@
+#start devent service
+npm start devent
+#stasrt queuer service
+node queuer-server -p listen-port -h listen-host --redis_port redis-port --redis_host redis-host
