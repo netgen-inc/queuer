@@ -9,6 +9,7 @@
         "optimist": ">= 0.3.0",
         "redis": ">= 0.7.1",
         "async": ">= 0.1.15",
+        "request": ">= 2.2.9",
         "devent": "https://github.com/netgen-inc/devent/tarball/master"
     },
     "main": "index",
