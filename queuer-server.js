@@ -33,7 +33,7 @@ de.on('task-error', function( task ){
   monitor.emit('task-' + task.uri, 'error');
 });
 
-var queues = new Queue();
+var queues = new Queue( argv.redis_port, argv.redis_host );
 
 var monitor = mon.createMonitor();
 
@@ -110,4 +110,4 @@ app.get('/state', function(req, res){
   });
 });
 
-app.listen(argv.p || 3000);
+app.listen(argv.p || 3000, argv.h || '0.0.0.0');
