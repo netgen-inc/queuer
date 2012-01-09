@@ -1,27 +1,11 @@
 var express = require('express');
 var _ = require('underscore');
-var mon = require('./lib/monitor');
 var argv = require('optimist').argv;
 var Queue = require('./lib/redis');
+var events = require('events');
 var de = require('devent').createDEvent('queuer');
 
 var startup = new Date();
-/*
-var hook = new Hook( {
-    name: 'hook-server',
-    'hook-host': '0.0.0.0'
-});
-
-hook.on('hook::ready', function(){
-  hook.on('*::task-finished', function( task ){
-    monitor.emit('task-' + task.uri, 'finished');
-  });
-  hook.on('*::task-error', function( task ){
-    monitor.emit('task-' + task.uri, 'error');
-  });
-});
-
-hook.connect();*/
 
 de.on('task-finished', function( task ){
 //console.log(['finish', task]);
@@ -35,7 +19,7 @@ de.on('task-error', function( task ){
 
 var queues = new Queue( argv.redis_port, argv.redis_host );
 
-var monitor = mon.createMonitor();
+var monitor = new events.EventEmitter();
 
 var app = express.createServer();
 app.use(express.bodyParser());
